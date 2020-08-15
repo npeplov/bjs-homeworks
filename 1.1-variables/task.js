@@ -10,9 +10,9 @@ function averageMark(a, g, p) {
 	let algebra, geography, physics, midMark = 0;
 	algebra = a;
 	geography = g;
-	// physics = p;
+	physics = p;
 	// унарный плюс для String->Number
-	physics = +document.getElementById('physics').value;
+	// physics = +document.getElementById('physics').value;
 
 	avgMark = (algebra + geography + physics) / 3;
 
