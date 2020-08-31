@@ -12,6 +12,18 @@ String.prototype.isPalindrome = function() {
 // создаем строковый объект "А роза упала на лапу Азора" <= this
 console.log( "А роза упала на лапу Азора".isPalindrome() );
 
+// String.prototype.isPalindrome2 = function () {
+//     let message = this.toUpperCase()
+//     for (let i = 0; i < message.length; i++) {
+//       if (message[i] != message[message.length - 1 - i]) {
+//         return false;
+//         // можно break если return не желателен
+//       }
+//     }
+//     return true;
+//   } 
+// console.log( "А роза упала на лапу Азора".isPalindrome2() );
+
 // задача №2
 function getAverageMark(marks) {
     if (marks.length === 0) {
@@ -28,7 +40,7 @@ function getAverageMark(marks) {
         return roundedAverage
     }
 }
-console.log(getAverageMark([3,2,3,4,5]))
+// console.log(getAverageMark([3,2,3,4,5]))
 
 // задача №3
 function checkBirthday(bdate) {
@@ -41,4 +53,4 @@ function checkBirthday(bdate) {
 
     return age >= 18;
 }
-console.log(checkBirthday("1990-01-01"))
+// console.log(checkBirthday("1990-01-01"))

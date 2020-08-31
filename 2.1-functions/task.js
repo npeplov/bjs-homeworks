@@ -10,7 +10,7 @@ function getSolutions( a, b, c ) {
     if (D > 0) {
         const x1 = (-b + Math.sqrt(D)) / 2*a;
         const x2 = (-b - Math.sqrt(D)) / 2*a;
-        roots = [x1, x2]
+        roots = [x1, x2];
     }
     
     return {D, roots};
@@ -31,25 +31,19 @@ function showSolutionsMessage( a, b, c ) {
 }
 
 function getAverageScore(data) {
-    let average = 0, quantity = 0;
-    let result = {average};
+    let result = {};
 
-    for (subject in data) {
+    for (subject in data) 
         result[subject] = getAverageMark(data[subject]);
-        average += result[subject];
-        quantity++;
-    }
 
-    if (quantity > 0)
-        result.average = average / quantity;
+    result.average = getAverageMark(Object.values(result));
 
     return result;
 }
 
 function getAverageMark(marks) {
-    if (marks.length === 0) {
+    if (marks.length === 0) 
         return 0;
-    }
 
     else {
         let sum = 0;
@@ -67,14 +61,14 @@ function getPersonData(secretData) {
         else
             lastName = getDecodedValue(secretData[key])
     }
-    return { firstName: firstName, lastName: lastName }
+    return { firstName: firstName, lastName: lastName };
 }
 
 function getDecodedValue(secret) {
     if (secret == '0')
         return "Родриго";
     else
-        return "Эмильо"
+        return "Эмильо";
 }
 
 console.log(getAverageScore({
