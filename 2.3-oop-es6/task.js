@@ -89,44 +89,48 @@ class StudentLog {
     getName() {
         return this.name;
     }
+
     addGrade(grade, subject) {
-        if (this.gradesArr[subject] == undefined) {
-            this.grades = []
-        }
-        if (grade > 0 && grade < 6) {
-            this.grades.push(grade);
-            this.gradesArr[subject] = this.grades;
-        }
+        if (this.gradesArr[subject] == undefined) 
+            this.gradesArr[subject] = [];
+        
+        if (grade > 0 && grade < 6) 
+            this.gradesArr[subject].push(grade);
+        
         else
-            console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
-        return this.grades.length;
+            console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`);
+
+        return this.gradesArr[subject].length;
     }
+
     getAverageBySubject(subject) {
         let marks = this.gradesArr[subject]
-        if (marks.length === 0) {
+        if (marks.length === 0) 
             return 0;
-        }
     
         else {
             let sum = 0;
-            for (let i=0; i < marks.length; i++) {
+            for (let i=0; i < marks.length; i++) 
                 sum += marks[i];
-            }
+
             const average = sum / marks.length;
             return +average.toFixed(2);
         }
     }
+
     getTotalAverage() {
         let sum = 0;
-        for (let subject in this.gradesArr) {
+        for (let subject in this.gradesArr) 
             sum += this.getAverageBySubject(subject);
-        }
+
         return sum / Object.values(this.gradesArr).length;
     }
 }
+
 const log = new StudentLog('Олег Никифоров');
-console.log(log.addGrade('отлично!', 'math'));
-// Вы пытались поставить оценку "отлично!" по предмету "math". Допускаются только числа от 1 до 5.
-// 0
+log.addGrade(2, 'algebra');
+log.addGrade(4, 'algebra');
+log.addGrade(5, 'geometry');
+console.log(log.gradesArr)
 
 
