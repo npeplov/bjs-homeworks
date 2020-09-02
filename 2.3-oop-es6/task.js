@@ -99,7 +99,7 @@ class StudentLog {
         }
         else
             console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
-        return this.gradesArr[subject].length;
+        return this.grades.length;
     }
     getAverageBySubject(subject) {
         let marks = this.gradesArr[subject]
@@ -124,7 +124,9 @@ class StudentLog {
         return sum / Object.values(this.gradesArr).length;
     }
 }
-
-
+const log = new StudentLog('Олег Никифоров');
+console.log(log.addGrade('отлично!', 'math'));
+// Вы пытались поставить оценку "отлично!" по предмету "math". Допускаются только числа от 1 до 5.
+// 0
 
 
