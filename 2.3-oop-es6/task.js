@@ -75,7 +75,7 @@ class Library {
         let requestedBook = this.findBookBy("name", bookName);
 
         if (requestedBook !== null) {
-            return this.books.splice( this.books.indexOf(requestedBook) , 1)[0];
+            return this.books.splice( requestedBook , 1)[0];
         }
         return null;
     }
@@ -126,11 +126,3 @@ class StudentLog {
         return sum / Object.values(this.gradesArr).length;
     }
 }
-
-const log = new StudentLog('Олег Никифоров');
-log.addGrade(2, 'algebra');
-log.addGrade(4, 'algebra');
-log.addGrade(5, 'geometry');
-console.log(log.gradesArr)
-
-
