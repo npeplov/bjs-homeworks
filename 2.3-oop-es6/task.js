@@ -1,3 +1,4 @@
+"use strict";
 // классы печатных изданий (книг, журналов) 
 
 class PrintEditionItem {
@@ -75,7 +76,7 @@ class Library {
         let requestedBook = this.findBookBy("name", bookName);
 
         if (requestedBook !== null) {
-            requestedBook = this.books.splice( requestedBook , 1)[0];
+            requestedBook = this.books.splice( this.books.indexOf(requestedBook) , 1)[0];
         }
         return requestedBook;
     }
@@ -126,3 +127,5 @@ class StudentLog {
         return sum / Object.values(this.gradesArr).length;
     }
 }
+
+
