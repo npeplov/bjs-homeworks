@@ -65,9 +65,9 @@ class Library {
             this.books.push(book);
     }
     findBookBy(type, value) {
-        for (let book in this.books) {
-            if (this.books[book][type] == value)
-                return this.books[book];
+        for (let book of this.books) {
+            if (book[type] == value)
+                return book;
         }
         return null; 
     }
@@ -75,9 +75,9 @@ class Library {
         let requestedBook = this.findBookBy("name", bookName);
 
         if (requestedBook !== null) {
-            return this.books.splice( requestedBook , 1)[0];
+            requestedBook = this.books.splice( requestedBook , 1)[0];
         }
-        return null;
+        return requestedBook;
     }
 }
 // школьный журнал
