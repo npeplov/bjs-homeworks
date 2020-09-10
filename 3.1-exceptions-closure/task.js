@@ -45,19 +45,29 @@ class Triangle {
     }
 }
 
+let triangle = new Triangle(1,2,3);
+
 function getTriangle(a, b, c) {
     try {
         return new Triangle(a, b, c);
     }
     catch(e) {
         const anotherTriangle = {
-            getArea: function getArea() {
-                return "Ошибка! Треугольник не существует";
+            getArea: function () {
+                // return this.error();
             },
-            getPerimeter: function name(params) {
-                return "Ошибка! Треугольник не существует";
-            }
+            getPerimeter: 1
+            // function () {
+                // return this.error();
+            // },
+            // error: () => { return "Ошибка! Треугольник не существует"; }
         }
         return anotherTriangle;
     }
+    finally {
+        console.log('Но Все равно давай досвиданья')
+    }
 }
+// const triangle = getTriangle(1,3,100);
+// triangle.getArea();
+// console.log(triangle.getPerimeter());
