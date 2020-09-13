@@ -1,4 +1,12 @@
 "use strict"
+// Default 4,3 GHz
+// sum: 8679.829ms
+// mSum: 11799.855ms
+
+// overclocked 4,7 GHz
+// sum: 7872.013ms
+// mSum: 10922.515ms
+
 // 2.1 Подготовка
 function sleep(milliseconds) 
 {
@@ -12,6 +20,7 @@ function sum(...args) {
 }
 
 function compareArrays(arr1, arr2) {
+  if (arr1.length === arr2.length)
   return arr1.every( 
     (elem, index) => elem === arr2[index]
   )          // по дефолту ретурн включен
@@ -21,14 +30,11 @@ function compareArrays(arr1, arr2) {
 function memorize(fn, limit) {
   const memory = [];
 
-  return (...rest) => { // <- сюда передаст свои аргументы
-    const args = [...rest]; // <- fn, если выполнить
-
-    const matchIsFound = memory.find(
-      (element) => 
-        compareArrays(element.rest, args)
+  return (...rest) => {
+    const matchIsFound = memory.find( (element) => 
+         compareArrays(element.rest, rest)
     );
-
+    
     if (matchIsFound)
       return matchIsFound.result;
 
@@ -44,7 +50,6 @@ function memorize(fn, limit) {
 }
 
 const mSum = memorize(sum, 5);
-// mSum(1,3);
 
 // 3. TestCase Ваша функция testCase должна принимать функцию testFunction, и название таймера процессорного времени.
 function testCase(testFunction, timername) {
@@ -52,14 +57,14 @@ function testCase(testFunction, timername) {
     console.time(timername);
     const argums = [...rest[0]];
 
-    for (let i = 0; i < 1000000; i++) {
+    for (let i = 0; i < 100000000; i++) {
       argums.forEach(spread => {
         testFunction(...spread);
       });
     }
 
     console.timeEnd(timername);
-    return '';
+    return;
   }
 }
 
@@ -68,11 +73,5 @@ const testMSum = testCase(mSum, "mSum");
 
 const argsArrays = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
 
-console.log(testSum(argsArrays));
-console.log(testMSum(argsArrays));
-
-// sum: 93.541ms
-// mSum: 290.876ms
-
-// Наверное, сам движок интерпретатора лучше оптимизирует повторяющиеся вычисления, чем метод сравнения со всеми элементами массива.
-// Если его принудительно не тормозить через sleep().
+testSum(argsArrays);
+testMSum(argsArrays);
