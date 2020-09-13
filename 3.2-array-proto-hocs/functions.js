@@ -13,7 +13,7 @@ function getCountReliableWeapons(durability) {
 
 // возвращает вердикт: есть ли оружия прочней принимаемой прочности?
 function hasReliableWeapons(durability) {
-    return !(weapons.filter(weapon => weapon.durability > durability)[0] === undefined);
+    return weapons.some(weapon => weapon.durability > durability);
 }
 
 // имена оружий, которые прочней полученного значения.
