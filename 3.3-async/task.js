@@ -50,42 +50,41 @@ class AlarmClock {
     }
 
     start() { //запускает все звонки
-        // функция проверки (checkClock), которая принимает звонок и проверяет
         // Если значение идентификатора текущего таймера отсутствует, то создайте новый интервал.
+        // Результат функции setInterval сохраните в свойство "идентификатор текущего таймера".
         if (this.timerId === null)
             this.timerId = setInterval(() => {
-                this.alarmCollection.forEach(value => this.checkClock(value))
+                this.alarmCollection.forEach( (value) => this.checkClock(value) )
             }, 1000);
-
-        // Результат функции setInterval сохраните в свойстве идентификатора текущего таймера.
     }
+
     checkClock(alarm){
         // если текущее время совпадает со временем звонка, то вызывайте колбек.
         if (this.getCurrentFormattedTime() == alarm.time) {
             alarm.callback();
+            console.log(this.timerId);
 
-            this.alarmCollection.splice(this.alarmCollection.indexOf(alarm), 1);
-
-            if (this.alarmCollection.length === 0)
-                clearInterval(this.timerId);
+        if (this.alarmCollection.length === 0)
+            clearInterval(this.timerId);
         }
-        console.log(this.timerId);
     }
 
     stop() { // - останавливает выполнение всех звонков
         // Сделайте проверку существования идентификатора текущего таймера.
-        if (!this.timerId == null) {
+        if (this.timerId !== null) {
             clearInterval(this.timerId);
             this.timerId = null;
         }
-        this.timerId = null;
         // Если у идентификатора текущего таймера есть значение, то вызовите функцию clearInterval для удаления 
-        // интервала, а так же удалите значение из свойства идентификатора текущего таймера.
+        // интервала, а так же удалите значение из свойства "идентификатор текущего таймера".
     }
 
     printAlarms() {
         // С помощью метода forEach выведите информацию о каждом звонке (id и time).
-        this.alarmCollection.forEach(alarm => console.log(alarm.id, alarm.time))
+        console.log(`Печать будильников в количестве: ${this.alarmCollection.length}`);
+        this.alarmCollection.forEach(alarm => {
+            console.log(`Будильник №${alarm.id}, заведен на ${alarm.time}`)
+        })
     }
 
     clearAlarms() {
@@ -96,24 +95,20 @@ class AlarmClock {
     }
 }
 
-// Создайте объект класса AlarmClock.
 let phoneAlarm = new AlarmClock();
-phoneAlarm.addClock("8:36", () => console.log("Пора вставать"), 1);
-phoneAlarm.addClock("8:37", () => console.log("Пора 30 вставать"), 2);
-// phoneAlarm.start();
+phoneAlarm.addClock("06:56", () => console.log("Пора вставать"), 1);
+
+phoneAlarm.addClock("06:57", () => {
+    console.log("Пора 2 вставать");
+    phoneAlarm.removeClock(2)
+}, 2);
+
+phoneAlarm.addClock("06:58", () => {
+    console.log("Пора 3 вставать");
+    phoneAlarm.clearAlarms();
+    phoneAlarm.printAlarms();
+}, 3);
+
+phoneAlarm.start();
 // phoneAlarm.printAlarms()
-console.log(phoneAlarm.getCurrentFormattedTime());
-
-// const checkDelay = (index, delay) => {
-//     const start = new Date();
-    // let t = setInterval( () => {
-    //     const end = new Date();
-    //     const realDelay = end - start;
-    //     console.log(`${index}: Задержка: ${realDelay} мс`);
-    //     if (realDelay > 1000)
-    //     clearInterval(t)
-    // }, delay)
-// }
-
-// for (let i = 0; i < 10; i++)
-//     checkDelay(1, 1)
+// console.log(phoneAlarm.getCurrentFormattedTime());
